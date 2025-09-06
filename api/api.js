@@ -2,6 +2,8 @@ import express, { Router } from "express"
 import serverless from "serverless-http"
 import { MongoClient, ObjectId } from "mongodb"
 import crypto from "crypto"
+import cors from "cors"
+
 
 const api = express()
 const router = Router()
@@ -95,7 +97,6 @@ async function authenticate(req, res, next) {
     }
 }
 
-secure.use(authenticate)
 
 // app data db
 async function getAppDb() {
@@ -282,7 +283,10 @@ secure.get("/get/:sessionId", async (req, res) => {
     }
 })
 
-api.use("/api", router)
-api.use("/api/secure", secure)
+secure.use(authenticate)
+
+api.use(cors())
+api.use("/", router)
+api.use("/api", secure)
 
 export const handler = serverless(api)
