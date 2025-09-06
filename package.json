@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@netlify/functions": "^4.2.5",
+    "@types/express": "^5.0.3",
+    "crypto": "^1.0.1",
+    "express": "^5.1.0",
+    "mongodb": "^6.19.0",
+    "serverless-http": "^4.0.0"
+  }
+}
