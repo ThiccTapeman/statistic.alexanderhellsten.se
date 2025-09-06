@@ -9,6 +9,7 @@ const api = express()
 const router = Router()
 const secure = Router()
 
+api.use(cors())
 api.use(express.json())
 
 const uri = process.env.MONGO_URI || "mongodb://localhost:27017/mydb"
@@ -96,6 +97,8 @@ async function authenticate(req, res, next) {
         res.status(500).json({ error: "Server error" })
     }
 }
+
+secure.use(authenticate)
 
 
 // app data db
@@ -283,9 +286,7 @@ secure.get("/get/:sessionId", async (req, res) => {
     }
 })
 
-secure.use(authenticate)
 
-api.use(cors())
 api.use("/", router)
 api.use("/api", secure)
 
