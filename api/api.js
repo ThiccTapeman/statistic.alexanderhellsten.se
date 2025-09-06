@@ -21,7 +21,7 @@ async function initAuthStore() {
         await mongoClient.connect()
     }
     if (!dbAuthorized) {
-        dbAuthorized = mongoClient.db("authorized")
+        dbAuthorized = mongoClient.db("analytics")
         colClients = dbAuthorized.collection("clients")
         colTokens = dbAuthorized.collection("tokens")
         await colTokens.createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 })
@@ -102,7 +102,7 @@ async function getAppDb() {
     if (!mongoClient.topology || !mongoClient.topology.isConnected()) {
         await mongoClient.connect()
     }
-    return mongoClient.db("appdb")
+    return mongoClient.db("analytics")
 }
 
 // visits
