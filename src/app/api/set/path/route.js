@@ -21,7 +21,7 @@ const authSchema = new mongoose.Schema(
     { versionKey: false }
 )
 
-const Paths = mongoose.models.Paths || mongoose.model("Paths", clickSchema)
+const Paths = mongoose.models.Paths || mongoose.model("Paths", pathSchema)
 const Auth = mongoose.models.Auth || mongoose.model("Auth", authSchema)
 
 async function connectDB() {
